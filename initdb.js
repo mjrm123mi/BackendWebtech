@@ -37,7 +37,7 @@ initdb.get('/', async(req, res) => {
         ["Ausgabe", "Halleneintritt", 12.50, 6, "2025-01-10"],
         ["Ausgabe", "Hotel", 59.99, 7, "2025-01-22"],
         ["Ausgabe", "Einkauf Rewe", 30.99, 8, "2025-01-22"],
-        ["Ausgabe", "Miete Januar", 750.00, 9, "2025-01-22"],
+        ["Ausgabe", "Miete Januar", 950.00, 9, "2025-01-22"],
         ["Ausgabe", "Krankenversicherung Januar", 200.00, 10, "2025-01-23"],
         ["Einnahme", "Gehalt", 1200.00, 18, "2025-01-24"],
         ["Einnahme", "Wohngeld", 100.00, 18, "2025-01-24"],
