@@ -3,7 +3,7 @@
 const pool = require('../db');
 const format = require('pg-format');
 
-// Create
+// Create (Hier ist die Funktion implementiert zum hinzufuegen)
 exports.create = async (req, res) => {
     try {
         const { transaktionstyp, beschreibung, betrag, kategorieid, datum } = req.body;
