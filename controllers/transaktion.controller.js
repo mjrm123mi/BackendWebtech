@@ -6,15 +6,20 @@ const format = require('pg-format');
 // Create (Hier ist die Funktion implementiert zum hinzufuegen)
 exports.create = async (req, res) => {
     try {
-        const { transaktionstyp, beschreibung, betrag, kategorieid, datum } = req.body;
+        const { transaktionstyp, beschreibung, betrag, kategorie, datum } = req.body;
         console.log("transaktionstyp: " + transaktionstyp);
         console.log("beschreibung: " + beschreibung);
         console.log("betrag: " + betrag);
-        console.log("kategorieid: " + kategorieid);
+        console.log("kategorie: " + kategorie);
         console.log("datum: " + datum);
-        const query = format('INSERT INTO transaktion(transaktionstyp, beschreibung, betrag, kategorieid, datum) VALUES (%L) RETURNING *', [transaktionstyp, beschreibung, betrag, kategorieid, datum]);
+
+        const query = format('SELECT kategorieid FROM kategorie WHERE name = %L', [kategorie]);
         const result = await pool.query(query);
-        res.status(201).send(result.rows[0]);
+        const kategorieid = result.rows[0]["kategorieid"];
+
+        const query2 = format('INSERT INTO transaktion(transaktionstyp, beschreibung, betrag, kategorieid, datum) VALUES (%L) RETURNING *', [transaktionstyp, beschreibung, betrag, kategorieid, datum]);
+        const result2 = await pool.query(query2);
+        res.status(201).send(result2.rows[0]);
     } catch (err) {
         console.error(err);
         res.status(500).send({ message: 'Fehler beim Erstellen der Transaktion' });

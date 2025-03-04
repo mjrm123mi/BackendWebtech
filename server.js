@@ -5,8 +5,8 @@ require('dotenv').config();
 // Routen importieren
 const rootRoute = require('./routes/root');
 const initRoute = require('./initdb');
-const transaktionenRoute = require('./routes/transaktion.routes')
-const kategorienRoute = require('./routes/kategorie.routes')
+const transaktionenRoute = require('./routes/transaktion.routes');
+const kategorienRoute = require('./routes/kategorie.routes');
 
 const app = express();
 const PORT = 3000;
@@ -16,7 +16,7 @@ app.use(cors());
 app.use('/', rootRoute);
 app.use('/init', initRoute);
 app.use('/transaktionen', transaktionenRoute);
-//app.use('/kategorien', kategorienRoute);
+app.use('/kategorien', kategorienRoute);
 
 
 app.listen(PORT, (error) => {
