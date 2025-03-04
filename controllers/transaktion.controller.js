@@ -24,7 +24,13 @@ exports.create = async (req, res) => {
 // Read (alle)
 exports.findAll = async (req, res) => {
     try {
-        const query = 'SELECT * FROM transaktion ORDER BY datum DESC'; //Neueste zuerst
+        const query = `
+            SELECT t.transaktionsid, t.beschreibung, t.transaktionstyp, t.betrag, t.datum, k.name AS "kategoriename" 
+            FROM transaktion t
+            INNER JOIN kategorie k
+            ON t.kategorieid = k.kategorieid
+            ORDER BY datum DESC
+            `; //Neueste zuerst (es wird nach Datum sortiert) ...die query ist SQL und hier ist es quasi ein String
         const result = await pool.query(query);
         res.send(result.rows);
     } catch (err) {
