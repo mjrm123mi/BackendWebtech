@@ -7,7 +7,12 @@ const format = require('pg-format');
 exports.create = async (req, res) => {
     try {
         const { transaktionstyp, beschreibung, betrag, kategorieid, datum } = req.body;
-        const query = format('INSERT INTO transaktion(transaktionstyp, beschreibung, betrag, kategorieid, datum) VALUES (%L) RETURNING *', [[transaktionstyp, beschreibung, betrag, kategorieid, datum]]);
+        console.log("transaktionstyp: " + transaktionstyp);
+        console.log("beschreibung: " + beschreibung);
+        console.log("betrag: " + betrag);
+        console.log("kategorieid: " + kategorieid);
+        console.log("datum: " + datum);
+        const query = format('INSERT INTO transaktion(transaktionstyp, beschreibung, betrag, kategorieid, datum) VALUES (%L) RETURNING *', [transaktionstyp, beschreibung, betrag, kategorieid, datum]);
         const result = await pool.query(query);
         res.status(201).send(result.rows[0]);
     } catch (err) {
@@ -71,7 +76,7 @@ exports.delete = async (req, res) => {
         const query = format('DELETE FROM transaktion WHERE transaktionsid = %L', [id]);
         const result = await pool.query(query);
         if (result.rowCount > 0) {
-            res.status(204).send({ message: 'Transaktion erfolgreich gelöscht' });
+            res.status(200).send({ message: 'Transaktion erfolgreich gelöscht' });
         } else {
             res.status(404).send({ message: `Transaktion mit ID ${id} nicht gefunden` });
         }
