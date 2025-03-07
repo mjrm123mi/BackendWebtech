@@ -62,6 +62,10 @@ initdb.get('/', async (req, res) => {
         ["Ausgabe", "Haftpflichtversicherung Monatsbeitrag", 4.00, 17, "2025-02-09"],
         ["Ausgabe", "Waschmaschine Reperatur", 100.00, 8, "2025-02-09"],
         ["Ausgabe", "Strom Monatsbeitrag", 50.00, 15, "2025-02-09"],
+        ["Ausgabe", "Strom Monatsbeitrag", 50.00, 15, "2025-02-09"],
+        ["Ausgabe", "Späti", 50.00, 24, "2025-02-10"],
+        ["Einnahme", "Rückzahlung geliehenes Geld Anna", 10.00, 24, "2025-02-10"],
+        ["Einnahme", "Oma Geld geschenkt", 5.00, 24, "2025-02-10"],
     ];
 
     // Befüllen der Tabelle kategorie mit relevanten Einträgen
@@ -89,7 +93,8 @@ initdb.get('/', async (req, res) => {
         ["Stipendium", false], //21
         ["Sozialleistung", false], //22
         ["Studium-Ausgaben", true], //23
-        ["Sonstiges", false] //24
+        ["Bargeld", false], //24
+        ["Sonstiges", false]  //25
     ];
 
 
