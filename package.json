@@ -4,6 +4,9 @@
   "description": "Backendprojekt für Webtech mit Node.js",
   "main": "index.js",
   "scripts": {
+    "start": "node app js",
+    "dev": "node,on app.js",
+    "build": "echo 'No build step required'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Maryam",
