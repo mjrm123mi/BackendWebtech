@@ -9,7 +9,7 @@ const transaktionenRoute = require('./routes/transaktion.routes');
 const kategorienRoute = require('./routes/kategorie.routes');
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(cors());
