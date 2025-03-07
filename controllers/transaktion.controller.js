@@ -30,7 +30,7 @@ exports.create = async (req, res) => {
 exports.findAll = async (req, res) => {
     try {
         const query = `
-            SELECT t.transaktionsid, t.beschreibung, t.transaktionstyp, t.betrag, t.datum, k.name AS "kategoriename" 
+            SELECT t.transaktionsid, t.beschreibung, t.transaktionstyp, t.betrag, t.datum, k.name AS "kategoriename", k.wichtigkeit AS "wichtigkeitslabel"
             FROM transaktion t
             INNER JOIN kategorie k
             ON t.kategorieid = k.kategorieid
