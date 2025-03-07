@@ -8,11 +8,14 @@ pg.types.setTypeParser(1082, value => value);
 // wird gesagt dass es das Datum so lassen soll.
 
 const client = new pg.Client({
-    user: process.env.PGUSER,
-    host: process.env.PGHOST,
-    database: process.env.PGDATABASE,
-    password: process.env.PGPASSWORD,
-    port: process.env.PGPORT,
+    user: process.env.DB_USER,
+    host: process.env.DB_HOST,
+    database: process.env.DB_DATABASE,
+    password: process.env.DB_PASSWORD,
+    port: process.env.DB_PORT,
+    ssl: {
+        rejectUnauthorized: false
+    }
 });
 
 client.connect(err => {
