@@ -4,19 +4,32 @@ const initdb = express.Router();
 const format = require('pg-format');
 
 
-initdb.get('/', async(req, res) => {
+initdb.get('/', async (req, res) => {
 
     // Anlegen der Tabelle transaktion
     let query = `
-            DROP TABLE IF EXISTS transaktion;
-            CREATE TABLE transaktion(transaktionsid serial PRIMARY KEY, transaktionstyp VARCHAR(50), beschreibung VARCHAR(50), betrag DOUBLE PRECISION, kategorieid INTEGER, datum DATE);
-            `;
+        DROP TABLE IF EXISTS transaktion;
+        CREATE TABLE transaktion
+        (
+            transaktionsid  serial PRIMARY KEY,
+            transaktionstyp VARCHAR(50),
+            beschreibung    VARCHAR(50),
+            betrag          DOUBLE PRECISION,
+            kategorieid     INTEGER,
+            datum           DATE
+        );
+    `;
 
     // Anlegen der Tabelle kategorie
     let query2 = `
-            DROP TABLE IF EXISTS kategorie;
-            CREATE TABLE kategorie(kategorieid serial PRIMARY KEY, name VARCHAR(50), wichtigkeit BOOL);
-            `;
+        DROP TABLE IF EXISTS kategorie;
+        CREATE TABLE kategorie
+        (
+            kategorieid serial PRIMARY KEY,
+            name        VARCHAR(50),
+            wichtigkeit BOOL
+        );
+    `;
 
     try {
         await client.query(query)
@@ -28,44 +41,56 @@ initdb.get('/', async(req, res) => {
 
     // Befüllen der Tabelle transaktion mit 50 Einträgen
     const values_transaktion = [
-        ["Ausgabe", "Schampoo und Duschgel", 3.01, 0, "2025-01-01"],
-        ["Ausgabe", "Fahrradmantel", 19.99, 1, "2025-01-01"],
-        ["Ausgabe", "Iboprophen", 10.00, 2, "2025-01-01"],
-        ["Ausgabe", "Zugticket", 50.00, 3, "2025-01-10"],
-        ["Ausgabe", "Duschschlauch", 9.99, 4, "2025-01-10"],
-        ["Ausgabe", "Konzertticket", 15.99, 5, "2025-01-10"],
-        ["Ausgabe", "Halleneintritt", 12.50, 6, "2025-01-10"],
-        ["Ausgabe", "Hotel", 59.99, 7, "2025-01-22"],
-        ["Ausgabe", "Einkauf Rewe", 30.99, 8, "2025-01-22"],
-        ["Ausgabe", "Miete Januar", 950.00, 9, "2025-01-22"],
-        ["Ausgabe", "Krankenversicherung Januar", 200.00, 10, "2025-01-23"],
-        ["Einnahme", "Gehalt", 1200.00, 18, "2025-01-24"],
-        ["Einnahme", "Wohngeld", 100.00, 18, "2025-01-24"],
+        ["Ausgabe", "Schampoo und Duschgel", 3.01, 2, "2025-01-01"],
+        ["Ausgabe", "Fahrradmantel", 19.99, 4, "2025-01-01"],
+        ["Ausgabe", "Iboprophen", 10.00, 5, "2025-01-01"],
+        ["Ausgabe", "Zugticket", 50.00, 6, "2025-01-10"],
+        ["Ausgabe", "Duschschlauch", 9.99, 7, "2025-01-10"],
+        ["Ausgabe", "Konzertticket", 15.99, 9, "2025-01-10"],
+        ["Ausgabe", "Halleneintritt", 12.50, 10, "2025-01-10"],
+        ["Ausgabe", "Hotel", 59.99, 11, "2025-01-22"],
+        ["Ausgabe", "Einkauf Rewe", 30.99, 1, "2025-01-22"],
+        ["Ausgabe", "Miete Januar", 950.00, 12, "2025-01-22"],
+        ["Ausgabe", "Krankenversicherung Januar", 200.00, 13, "2025-01-23"],
+        ["Einnahme", "Gehalt", 1200.00, 20, "2025-01-24"],
+        ["Einnahme", "Wohngeld", 100.00, 22, "2025-01-24"],
+        ["Ausgabe", "Schampoo und Duschgel", 3.01, 2, "2025-02-07"],
+        ["Ausgabe", "Birnen", 3.50, 1, "2025-02-07"],
+        ["Einnahme", "Deutschlandstipendium", 300, 21, "2025-02-07"],
+        ["Ausgabe", "Jeans", 15.00, 3, "2025-02-07"],
+        ["Ausgabe", "Semesterticket", 350.00, 23, "2025-02-08"],
+        ["Ausgabe", "Haftpflichtversicherung Monatsbeitrag", 4.00, 17, "2025-02-09"],
+        ["Ausgabe", "Waschmaschine Reperatur", 100.00, 8, "2025-02-09"],
+        ["Ausgabe", "Strom Monatsbeitrag", 50.00, 15, "2025-02-09"],
     ];
 
     // Befüllen der Tabelle kategorie mit relevanten Einträgen
     const values_kategorie = [
-        ["Kosmetik", false],
-        ["Reperaturen", true],
-        ["Medikamente", true],
-        ["Transport", true],
-        ["Wohnung", false],
-        ["Ausgehen", false],
-        ["Klettern", false],
-        ["Urlaub", false],
-        ["Essen", true],
-        ["Miete", true],
-        ["Krankenversicherung", true],
-        ["GEZ", true],
-        ["Strom", true],
-        ["Nebenkosten", true],
-        ["Versicherung", true],
-        ["Anlage", false],
-        ["Mitgliedschaften", false],
-        ["Sonstiges", false],
-        ["Job", false],
+        ["Essen", true], //1
+        ["Drogerie", false], //2
+        ["Kleidung", false], //3
+        ["Fahrradmaterial", false], //4
+        ["Medikamente", true], //5
+        ["Transport", true], //6
+        ["Wohnung", false], //7
+        ["Reperaturen", true], //8
+        ["Ausgehen", false], //9
+        ["Klettern", false], //10
+        ["Urlaub", false], //11
+        ["Miete", true], //12
+        ["Krankenversicherung", true], //13
+        ["GEZ", true], //14
+        ["Strom", true], //15
+        ["Nebenkosten", true], //16
+        ["Versicherung", true], //17
+        ["Anlage", false], //18
+        ["Mitgliedschaften", false], //19
+        ["Job", false], //20
+        ["Stipendium", false], //21
+        ["Sozialleistung", false], //22
+        ["Studium-Ausgaben", true], //23
+        ["Sonstiges", false] //24
     ];
-
 
 
     // hierfuer muss pg-format installiert werden (wegen %L):
