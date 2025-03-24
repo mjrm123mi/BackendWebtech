@@ -1,7 +1,7 @@
 const express = require('express');
-const client = require('./db');
+const client = require('./db');// Verbindung zur Datenbank
 const initdb = express.Router();
-const format = require('pg-format');
+const format = require('pg-format');// Modul zur Formatierung von SQL-Statements
 
 
 initdb.get('/', async (req, res) => {
@@ -27,12 +27,12 @@ initdb.get('/', async (req, res) => {
             transaktionstyp VARCHAR(50),
             beschreibung    VARCHAR(50),
             betrag          DOUBLE PRECISION,
-            kategorieid     INTEGER REFERENCES kategorie(kategorieid), --Foreign key hinzugefuegt..Tabelle kategorie und Spalte kategorieid
+            kategorieid     INTEGER REFERENCES kategorie (kategorieid), --Foreign key hinzugefuegt..Tabelle kategorie und Spalte kategorieid
             datum           DATE
         );
     `;
 
-
+    // Tabellen erstellen
     try {
         await client.query(query)
         await client.query(query2)
@@ -96,19 +96,18 @@ initdb.get('/', async (req, res) => {
         ["Sonstiges", false]  //25
     ];
 
-
+    // Einfügen der Daten in die Datenbank
     // hierfuer muss pg-format installiert werden (wegen %L):
     const paramquery = format('INSERT INTO kategorie(name, wichtigkeit) VALUES %L RETURNING *', values_kategorie);
 
     const paramquery2 = format('INSERT INTO transaktion(transaktionstyp, beschreibung, betrag, kategorieid, datum) VALUES %L RETURNING *', values_transaktion);
 
 
-
     try {
         const result = await client.query(paramquery)
         const result2 = await client.query(paramquery2)
         console.log("transaktionen hinzugefuegt ...")
-        res.status(200)
+        res.status(200) //Erfolgreiche Antwort senden
         res.send(result.rows)
     } catch (err) {
         console.log(err)

@@ -5,22 +5,22 @@ const express = require('express');
 const router = express.Router();
 const transaktionController = require('../controllers/transaktion.controller');
 
-// Create (Hier wird die Funktion aufgerufen create aufgerufen)
+// Create (Neue Transaktion hinzufügen)
 router.post('/', transaktionController.create);
 // könnte auch '/add' schreiben in Pfad. Hier ist ein Post.
 
-// Read (alle)
+// Read (Alle Transaktionen abrufen)
 router.get('/', transaktionController.findAll);
 // hier ist ein get
 
 
-// Read (einzeln)
+// Read (Eine Transaktion abrufen)
 router.get('/:id', transaktionController.findOne);
 
-// Update
+// Update (Transaktion bearbeiten)
 router.put('/:id', transaktionController.update);
 
-// Delete
+// Delete (Transaktion löschen)
 router.delete('/:id', transaktionController.delete);
 
 module.exports = router;

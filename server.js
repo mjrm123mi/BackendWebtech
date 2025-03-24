@@ -1,18 +1,18 @@
 const express = require('express');
 const cors = require('cors');
-require('dotenv').config();
+require('dotenv').config(); // Lädt Umgebungsvariablen aus einer `.env`-Datei
 
 // Routen importieren
 const rootRoute = require('./routes/root');
 const initRoute = require('./initdb');
-const transaktionenRoute = require('./routes/transaktion.routes');
-const kategorienRoute = require('./routes/kategorie.routes');
+const transaktionenRoute = require('./routes/transaktion.routes');// Route für Transaktionen (CRUD)
+const kategorienRoute = require('./routes/kategorie.routes');// Route für Kategorien (nur Lesezugriff)
 
-const app = express();
-const PORT = process.env.PORT || 3000;
+const app = express();// Express-Anwendung erstellen
+const PORT = process.env.PORT || 3000;// Server-Port aus Umgebungsvariablen oder Standardwert 3000
 
-//Konfiguration vom Webserver. Die app variable ist der Webserver und hier
-//ist definiert wie der Webserver sich verhalten soll.
+//Konfiguration vom Webserver.
+// Die app variable ist der Webserver und hier ist definiert wie der Webserver sich verhalten soll.
 app.use(express.json());
 app.use(cors());
 app.use('/', rootRoute);

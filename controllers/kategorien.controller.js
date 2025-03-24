@@ -1,7 +1,11 @@
+
 const pool = require('../db');
+// Importiert die PostgreSQL-Verbindung aus der Datei `db.js`.
+// `pool` wird verwendet, um SQL-Abfragen an die Datenbank zu senden.
+
 const format = require('pg-format');
 
-// Read (alle)
+// Funktion: Alle Kategorien abrufen (Read all)
 exports.findAll = async (req, res) => {
     try {
         const query = 'SELECT name FROM kategorie';

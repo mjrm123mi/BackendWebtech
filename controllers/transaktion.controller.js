@@ -1,12 +1,14 @@
-//CRUD LOGIK
-// controllers/transaktion.controller.js
+// CRUD LOGIK: Controller für Transaktionen
+
 const pool = require('../db');
 const format = require('pg-format');
 
 // Create (Hier ist die Funktion implementiert zum hinzufuegen)
 exports.create = async (req, res) => {
     try {
+        // Extrahiert die erforderlichen Werte aus der Anfrage (Request-Body)
         const { transaktionstyp, beschreibung, betrag, kategorie, datum } = req.body;
+
         console.log("transaktionstyp: " + transaktionstyp);
         console.log("beschreibung: " + beschreibung);
         console.log("betrag: " + betrag);
@@ -17,8 +19,11 @@ exports.create = async (req, res) => {
         const result = await pool.query(query);
         const kategorieid = result.rows[0]["kategorieid"];
 
+        // SQL-Abfrage: Fügt die neue Transaktion in die Tabelle ein
         const query2 = format('INSERT INTO transaktion(transaktionstyp, beschreibung, betrag, kategorieid, datum) VALUES (%L) RETURNING *', [transaktionstyp, beschreibung, betrag, kategorieid, datum]);
         const result2 = await pool.query(query2);
+
+        // Sendet die erstellte Transaktion (erste Zeile des Ergebnisses) zurück
         res.status(201).send(result2.rows[0]);
     } catch (err) {
         console.error(err);
@@ -26,9 +31,10 @@ exports.create = async (req, res) => {
     }
 };
 
-// Read (alle)
+// Read (alle Transaktionen): Transaktionen abrufen
 exports.findAll = async (req, res) => {
     try {
+        // SQL-Abfrage: Holt alle Transaktionen inklusive Kategoriename und Wichtigkeitslabel
         const query = `
             SELECT t.transaktionsid, t.beschreibung, t.transaktionstyp, t.betrag, t.datum, k.name AS "kategoriename", k.wichtigkeit AS "wichtigkeitslabel"
             FROM transaktion t
@@ -47,7 +53,7 @@ exports.findAll = async (req, res) => {
 // Read (einzeln)
 exports.findOne = async (req, res) => {
     try {
-        const id = req.params.id;
+        const id = req.params.id; // Holt die Transaktions-ID aus der URL-Parameter
         const query = format('SELECT * FROM transaktion WHERE transaktionsid = %L', [id]);
         const result = await pool.query(query);
         if (result.rows.length > 0) {
@@ -80,10 +86,10 @@ exports.update = async (req, res) => {
     }
 };
 
-// Delete
+// Delete: Transaktion löschen
 exports.delete = async (req, res) => {
     try {
-        const id = req.params.id;
+        const id = req.params.id;// ID der zu löschenden Transaktion
         const query = format('DELETE FROM transaktion WHERE transaktionsid = %L', [id]);
         const result = await pool.query(query);
         if (result.rowCount > 0) {
