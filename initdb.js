@@ -6,22 +6,8 @@ const format = require('pg-format');
 
 initdb.get('/', async (req, res) => {
 
-    // Anlegen der Tabelle transaktion
-    let query = `
-        DROP TABLE IF EXISTS transaktion;
-        CREATE TABLE transaktion
-        (
-            transaktionsid  serial PRIMARY KEY,
-            transaktionstyp VARCHAR(50),
-            beschreibung    VARCHAR(50),
-            betrag          DOUBLE PRECISION,
-            kategorieid     INTEGER,
-            datum           DATE
-        );
-    `;
-
     // Anlegen der Tabelle kategorie
-    let query2 = `
+    let query = `
         DROP TABLE IF EXISTS kategorie;
         CREATE TABLE kategorie
         (
@@ -30,6 +16,22 @@ initdb.get('/', async (req, res) => {
             wichtigkeit BOOL
         );
     `;
+
+
+    // Anlegen der Tabelle transaktion
+    let query2 = `
+        DROP TABLE IF EXISTS transaktion;
+        CREATE TABLE transaktion
+        (
+            transaktionsid  serial PRIMARY KEY,
+            transaktionstyp VARCHAR(50),
+            beschreibung    VARCHAR(50),
+            betrag          DOUBLE PRECISION,
+            kategorieid     INTEGER FOREIGN KEY REFERENCES kategorie(kategorieid), --Foreign key hinzugefuegt..Tabelle kategorie und Spalte kategorieid
+            datum           DATE
+        );
+    `;
+
 
     try {
         await client.query(query)

@@ -36,7 +36,7 @@ exports.findAll = async (req, res) => {
             ON t.kategorieid = k.kategorieid
             ORDER BY datum DESC
             `; //Neueste zuerst (es wird nach Datum sortiert) ...die query ist SQL und hier ist es quasi ein String
-        const result = await pool.query(query);
+        const result = await pool.query(query); //hier wird die query an die DB gesendet
         res.send(result.rows);
     } catch (err) {
         console.error(err);
