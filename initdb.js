@@ -43,7 +43,6 @@ initdb.get('/', async (req, res) => {
 
     // Befüllen der Tabelle transaktion mit 50 Einträgen
     const values_transaktion = [
-        ["Ausgabe", "Schampoo und Duschgel", 3.01, 2, "2025-01-01"],
         ["Ausgabe", "Fahrradmantel", 19.99, 4, "2025-01-01"],
         ["Ausgabe", "Iboprophen", 10.00, 5, "2025-01-01"],
         ["Ausgabe", "Zugticket", 50.00, 6, "2025-01-10"],
@@ -55,7 +54,6 @@ initdb.get('/', async (req, res) => {
         ["Ausgabe", "Miete Januar", 550.00, 12, "2025-01-22"],
         ["Ausgabe", "Krankenversicherung Januar", 200.00, 13, "2025-01-23"],
         ["Einnahme", "Gehalt", 980.00, 20, "2025-01-24"],
-        ["Einnahme", "Wohngeld", 100.00, 22, "2025-01-24"],
         ["Ausgabe", "Schampoo und Duschgel", 3.01, 2, "2025-02-07"],
         ["Ausgabe", "Birnen", 3.50, 1, "2025-02-07"],
         ["Einnahme", "Deutschlandstipendium", 300, 21, "2025-02-07"],
