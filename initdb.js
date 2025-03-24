@@ -98,9 +98,10 @@ initdb.get('/', async (req, res) => {
 
 
     // hierfuer muss pg-format installiert werden (wegen %L):
-    const paramquery = format('INSERT INTO transaktion(transaktionstyp, beschreibung, betrag, kategorieid, datum) VALUES %L RETURNING *', values_transaktion);
+    const paramquery = format('INSERT INTO kategorie(name, wichtigkeit) VALUES %L RETURNING *', values_kategorie);
 
-    const paramquery2 = format('INSERT INTO kategorie(name, wichtigkeit) VALUES %L RETURNING *', values_kategorie);
+    const paramquery2 = format('INSERT INTO transaktion(transaktionstyp, beschreibung, betrag, kategorieid, datum) VALUES %L RETURNING *', values_transaktion);
+
 
 
     try {
