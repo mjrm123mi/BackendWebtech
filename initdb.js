@@ -8,7 +8,7 @@ initdb.get('/', async (req, res) => {
 
     // Anlegen der Tabelle kategorie
     let query = `
-        DROP TABLE IF EXISTS kategorie;
+        DROP TABLE IF EXISTS kategorie CASCADE;
         CREATE TABLE kategorie
         (
             kategorieid serial PRIMARY KEY,
