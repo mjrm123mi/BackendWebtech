@@ -6,7 +6,7 @@ const format = require('pg-format');
 // Create (Hier ist die Funktion implementiert zum hinzufuegen)
 exports.create = async (req, res) => {
     try {
-        // Extrahiert die erforderlichen Werte aus der Anfrage (Request-Body)
+        // Extrahiert die erforderlichen Werte aus der Anfrage (aus dem Request-Body)
         const { transaktionstyp, beschreibung, betrag, kategorie, datum } = req.body;
 
         console.log("transaktionstyp: " + transaktionstyp);
@@ -15,11 +15,13 @@ exports.create = async (req, res) => {
         console.log("kategorie: " + kategorie);
         console.log("datum: " + datum);
 
+        //erste Anfrage an die DB die die Kategorieid rausholt (ich übergebe vom FE aus nur den Kategorienamen)
+        //die SQLfrage ist, was ist die katgorieid vom kategorienamen
         const query = format('SELECT kategorieid FROM kategorie WHERE name = %L', [kategorie]);
         const result = await pool.query(query);
-        const kategorieid = result.rows[0]["kategorieid"];
+        const kategorieid = result.rows[0]["kategorieid"]; //hier wird id gespeichert
 
-        // SQL-Abfrage: Fügt die neue Transaktion in die Tabelle ein
+        // SQL-Abfrage: Fügt die neue Transaktion in die Tabelle ein mit insert
         const query2 = format('INSERT INTO transaktion(transaktionstyp, beschreibung, betrag, kategorieid, datum) VALUES (%L) RETURNING *', [transaktionstyp, beschreibung, betrag, kategorieid, datum]);
         const result2 = await pool.query(query2);
 
