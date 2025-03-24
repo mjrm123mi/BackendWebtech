@@ -27,7 +27,7 @@ initdb.get('/', async (req, res) => {
             transaktionstyp VARCHAR(50),
             beschreibung    VARCHAR(50),
             betrag          DOUBLE PRECISION,
-            kategorieid     INTEGER FOREIGN KEY REFERENCES kategorie(kategorieid), --Foreign key hinzugefuegt..Tabelle kategorie und Spalte kategorieid
+            kategorieid     INTEGER REFERENCES kategorie(kategorieid), --Foreign key hinzugefuegt..Tabelle kategorie und Spalte kategorieid
             datum           DATE
         );
     `;
