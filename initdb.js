@@ -43,6 +43,8 @@ initdb.get('/', async (req, res) => {
 
     // Befüllen der Tabelle transaktion mit 50 Einträgen
     const values_transaktion = [
+        ["Ausgabe", "Blaubeeren", 3.99, 1, "2025-05-03"],
+        ["Ausgabe", "Lakritze", 1.99, 1, "2025-05-03"],
         ["Ausgabe", "Joghurt", 2.99, 1, "2025-02-03"],
         ["Ausgabe", "Brot", 1.99, 1, "2025-02-02"],
         ["Ausgabe", "Fahrradmantel", 19.99, 4, "2025-01-01"],
@@ -51,13 +53,13 @@ initdb.get('/', async (req, res) => {
         ["Ausgabe", "Konzertticket", 15.99, 9, "2025-01-10"],
         ["Ausgabe", "Halleneintritt", 12.50, 10, "2025-01-10"],
         ["Ausgabe", "Einkauf Rewe", 30.99, 1, "2025-01-22"],
-        ["Ausgabe", "Miete Januar", 550.00, 12, "2025-01-22"],
-        ["Ausgabe", "Krankenversicherung Januar", 200.00, 13, "2025-01-23"],
-        ["Einnahme", "Gehalt", 980.00, 20, "2025-01-24"],
+        //["Ausgabe", "Miete Januar", 550.00, 12, "2025-01-22"],
+      //  ["Ausgabe", "Krankenversicherung Januar", 200.00, 13, "2025-01-23"],
+      //  ["Einnahme", "Gehalt", 980.00, 20, "2025-01-24"],
         ["Ausgabe", "Spüli", 3.01, 2, "2025-02-07"],
         ["Ausgabe", "Birnen", 3.50, 1, "2025-02-07"],
         ["Ausgabe", "Jeans", 15.00, 3, "2025-02-07"],
-        ["Ausgabe", "Semesterticket", 350.00, 23, "2025-02-08"],
+     //   ["Ausgabe", "Semesterticket", 350.00, 23, "2025-02-08"],
         ["Ausgabe", "Haftpflichtversicherung Monatsbeitrag", 4.00, 17, "2025-02-09"],
         ["Ausgabe", "Waschmaschine Reperatur", 100.00, 8, "2025-02-09"],
         ["Ausgabe", "Strom Monatsbeitrag", 50.00, 15, "2025-02-09"],

@@ -1,4 +1,4 @@
-//API-Endpunkte
+//API-Endpunkte alles hier hat '/transaktionen' davor
 
 // routes/transaktion.routes.js
 const express = require('express');
